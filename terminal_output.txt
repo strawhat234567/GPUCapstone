@@ -1,0 +1,2 @@
+coder@546ba78cfb43:~/project$ make
+nvcc -O3 -std=c++17 -lineinfo main.cu attention_naive.cu attention_tiled.cu attention_online_tiled.cu cpu_reference.cpp -o attention_bench

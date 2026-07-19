@@ -1,0 +1,74 @@
+==== GPU / CUDA environment ====
+Sun Jul 19 04:53:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 560.28.03              Driver Version: 560.28.03      CUDA Version: 12.6     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L4                      On  |   00000000:3E:00.0 Off |                    0 |
+| N/A   52C    P0             29W /   72W |    1247MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
++-----------------------------------------------------------------------------------------+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2021 NVIDIA Corporation
+Built on Mon_May__3_19:15:13_PDT_2021
+Cuda compilation tools, release 11.3, V11.3.109
+Build cuda_11.3.r11.3/compiler.29920130_0
+
+==== Clean build ====
+
+==== Single sanity run ====
+naive: 0.0173446 ms, max_abs_error=3.57628e-07
+shared_tiled: 0.017152 ms, max_abs_error=3.57628e-07
+online_tiled: 0.0253744 ms, max_abs_error=3.27826e-07
+
+==== Benchmark sweep ====
+
+---- n=64, d=32 ----
+naive: 0.0104774 ms, max_abs_error=4.76837e-07
+shared_tiled: 0.0105779 ms, max_abs_error=4.76837e-07
+online_tiled: 0.00970752 ms, max_abs_error=5.96046e-07
+
+---- n=64, d=64 ----
+naive: 0.0129923 ms, max_abs_error=3.57628e-07
+shared_tiled: 0.0129229 ms, max_abs_error=3.57628e-07
+online_tiled: 0.0134854 ms, max_abs_error=5.36442e-07
+
+---- n=128, d=32 ----
+naive: 0.0133837 ms, max_abs_error=3.57628e-07
+shared_tiled: 0.0135373 ms, max_abs_error=3.57628e-07
+online_tiled: 0.0174694 ms, max_abs_error=4.17233e-07
+
+---- n=128, d=64 ----
+naive: 0.0172954 ms, max_abs_error=3.57628e-07
+shared_tiled: 0.0171501 ms, max_abs_error=3.57628e-07
+online_tiled: 0.0253626 ms, max_abs_error=3.27826e-07
+
+---- n=256, d=32 ----
+naive: 0.0246374 ms, max_abs_error=4.17233e-07
+shared_tiled: 0.0244634 ms, max_abs_error=4.17233e-07
+online_tiled: 0.0341094 ms, max_abs_error=4.76837e-07
+
+---- n=256, d=64 ----
+naive: 0.035543 ms, max_abs_error=2.98023e-07
+shared_tiled: 0.034601 ms, max_abs_error=2.98023e-07
+online_tiled: 0.0511078 ms, max_abs_error=4.17233e-07
+
+---- n=512, d=32 ----
+naive: 0.0461005 ms, max_abs_error=4.17233e-07
+shared_tiled: 0.0464896 ms, max_abs_error=4.17233e-07
+online_tiled: 0.0971878 ms, max_abs_error=4.17233e-07
+
+---- n=512, d=64 ----
+naive: 0.0730112 ms, max_abs_error=4.17233e-07
+shared_tiled: 0.0727955 ms, max_abs_error=4.17233e-07
+online_tiled: 0.14854 ms, max_abs_error=3.57628e-07
