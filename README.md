@@ -1,8 +1,8 @@
 # Tiled Causal Attention in Plain CUDA
 
-A CUDA kernel study for Coursera-scale experiments, inspired by the tile-oriented attention approach associated with ThunderKittens. The project stays intentionally simple: plain CUDA, no H100-specific dependencies, no PyTorch extension build, and no full LLM training pipeline.
+This project implements and benchmarks three CUDA kernels for causal self-attention on a single attention head: a naive baseline, a shared-memory tiled kernel, and an online-softmax tiled kernel. Its purpose is to show how kernel structure on the GPU changes memory usage and runtime performance while preserving numerical correctness, using the same attention operation expressed in three designs. In the naive and shared-memory tiled implementations, the code explicitly forms the attention score matrix and then applies softmax and value weighting, whereas the online-softmax tiled implementation follows the FlashAttention idea of processing one key/value tile at a time and updating the softmax normalization incrementally so the full score matrix is never stored in global memory. The project draws on ThunderKittens for a tile-oriented view of AI kernels and on online-softmax formulations used to derive FlashAttention, adapting those concepts to a plain-CUDA setting suitable for a teaching benchmark.
 
-This repository focuses on correctness, kernel structure, and memory behavior. The benchmark reports average device time and maximum absolute error relative to a CPU float reference.
+A central goal is to understand why the kernels behave differently, not just to demonstrate that they run. To support that goal, the repository includes a CPU reference implementation for validation, timing with CUDA events, and experiments across multiple sequence lengths and head dimensions, so both numerical error and runtime can be examined side by side.
 
 ## Implementations
 
